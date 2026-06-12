@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>26夏季蟬與老母京都行</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-left">
+        <p class="hero-kicker">Kyoto Trip Planner 2026</p>
+        <h1>26夏季蟬與老母京都行</h1>
+        <div class="hero-info">
+          <div class="hero-info-row">
+            <span class="hero-info-label">旅程日期</span>
+            <span class="hero-info-value">2026/06/23–06/29</span>
+          </div>
+          <div class="hero-info-row">
+            <span class="hero-info-label">主基地</span>
+            <span class="hero-info-value">Rakuten STAY URBAN Shijo Teramachi</span>
+            <div class="stat-links">
+              <a class="stat-link-btn" href="https://maps.app.goo.gl/ghrRRKgcL4RKyJko9" target="_blank" rel="noopener">開啟 Google 地圖</a>
+              <a class="stat-link-btn" href="https://d-reserve.jp/GSEA001F01300/GSEA001A01?hotelCode=0000000945&lodgingDateFrom=20260614&lodgingDateTo=20260615&lt001=00&lnum001=2&sortKeyOrder=1&ghaLanding=true" target="_blank" rel="noopener">官網</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="top-nav card">
+      <div class="tab-group">
+        <button class="tab-btn active" data-tab="overview">總覽</button>
+        <button class="tab-btn" data-tab="schedule">行程</button>
+        <button class="tab-btn" data-tab="coupons">票券</button>
+      </div>
+    </nav>
+
+    <main>
+      <section id="overview" class="tab-panel active">
+        <div class="grid two-col">
+          <div class="card">
+            <h2>旅程摘要</h2>
+            <div id="tripSummary" class="summary-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-header-row">
+              <h2>即時提醒</h2>
+              <div class="header-btns">
+                <button id="reminderNewBtn" class="icon-btn">新增</button>
+                <button id="reminderEditBtn" class="icon-btn">編輯</button>
+                <button id="reminderDeleteBtn" class="icon-btn">刪除</button>
+              </div>
+            </div>
+            <div id="dynamicReminders" class="summary-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="schedule" class="tab-panel">
+        <div class="grid schedule-layout">
+          <aside class="card sticky-col">
+            <h2>快速篩選</h2>
+            <div class="filter-group" id="dayFilterGroup"></div>
+            <hr />
+            <h3>系統說明</h3>
+            <ul class="plain-list small muted">
+              <li>每個 Day 保留原始規劃中的主要路徑與交通節奏。</li>
+              <li>畫面中的 Coupon 標籤分成「系統預設」與「自訂新增」。</li>
+              <li>可在優惠券頁新增自訂 Coupon，並綁定對應天數。</li>
+            </ul>
+          </aside>
+          <section id="scheduleCards" class="stack"></section>
+        </div>
+      </section>
+
+      <section id="coupons" class="tab-panel">
+        <div class="grid coupon-layout">
+          <section class="stack">
+            <div class="card">
+              <h2>新增編輯票券</h2>
+              <p class="muted small">支援 JPG / PNG 圖片上傳。</p>
+              <form id="couponForm" class="coupon-form">
+                <input type="hidden" id="couponId" />
+                <div class="form-grid">
+                  <label>
+                    <span>Coupon 名稱</span>
+                    <input id="couponName" type="text" placeholder="例如：JR HARUKA 券" required />
+                  </label>
+                  <label>
+                    <span>類型</span>
+                    <select id="couponType" required>
+                      <option value="交通">交通</option>
+                      <option value="景點">景點</option>
+                      <option value="預約">預約</option>
+                      <option value="購物">購物</option>
+                      <option value="餐飲">餐飲</option>
+                      <option value="其他">其他</option>
+                    </select>
+                  </label>
+                  <label class="span-full">
+                    <span>預計使用日期</span>
+                    <input id="couponValidFrom" type="date" />
+                  </label>
+                </div>
+
+                <label>
+                  <span>使用建議 / 備註</span>
+                  <textarea id="couponSuggestion" rows="3" placeholder="例如：優先套用在 HARUKA 特急來回、僅限指定日期使用"></textarea>
+                </label>
+
+                <div class="form-grid upload-grid">
+                  <label class="upload-box">
+                    <span>上傳 Coupon 圖片（JPG / PNG）</span>
+                    <input id="couponImage" type="file" accept="image/jpeg,image/png" />
+                    <small>建議圖片不要太大，原型版將儲存在瀏覽器本機。</small>
+                  </label>
+                  <div class="image-preview-wrap">
+                    <div id="imagePreviewEmpty" class="preview-empty">尚未選擇圖片</div>
+                    <img id="imagePreview" class="image-preview hidden" alt="coupon preview" />
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">儲存票券</button>
+                  <button id="cancelEditBtn" type="button" class="btn btn-secondary hidden">取消編輯</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <h2>票券清單</h2>
+              <div id="couponStats" class="stats-row"></div>
+              <div id="couponList" class="coupon-list"></div>
+            </div>
+          </section>
+
+          <aside class="stack">
+            <div class="card">
+              <h2>圖片上傳邏輯</h2>
+              <ol class="plain-list small muted numbered">
+                <li>使用者在表單選擇 JPG 或 PNG。</li>
+                <li>前端讀取檔案並轉成 base64 Data URL。</li>
+                <li>Coupon 資料與圖片一起存在 LocalStorage。</li>
+                <li>畫面重新整理後仍可顯示，但只存在此瀏覽器。</li>
+              </ol>
+            </div>
+            <div class="card">
+              <h2>下一步建議</h2>
+              <ul class="plain-list small muted">
+                <li>若要正式版：將圖片改存雲端（例如 Azure Blob / Supabase Storage）。</li>
+                <li>將 Coupon 建立為獨立資料表，行程只存關聯 ID。</li>
+                <li>之後可加「已使用」、「剩餘次數」、「到期提醒」。</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <template id="scheduleCardTemplate">
+    <article class="card schedule-card">
+      <div class="schedule-head">
+        <div>
+          <div class="chip-row">
+            <span class="chip chip-blue js-date"></span>
+            <span class="chip chip-amber js-area"></span>
+            <span class="chip chip-green js-theme"></span>
+          </div>
+          <h3 class="js-title"></h3>
+          <p class="muted js-focus"></p>
+        </div>
+        <div class="mini-info">
+          <div><strong>住宿：</strong><span class="js-stay"></span></div>
+          <div><strong>交通配置：</strong><span class="js-transport"></span></div>
+        </div>
+      </div>
+      <div class="chip-row coupon-chip-wrap js-coupons"></div>
+      <div class="step-list js-steps"></div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
