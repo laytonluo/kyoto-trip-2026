@@ -86,7 +86,7 @@
                 <input type="hidden" id="couponId" />
                 <div class="form-grid">
                   <label>
-                    <span>Coupon 名稱</span>
+                    <span>票券名稱</span>
                     <input id="couponName" type="text" placeholder="例如：JR HARUKA 券" required />
                   </label>
                   <label>
@@ -113,9 +113,8 @@
 
                 <div class="form-grid upload-grid">
                   <label class="upload-box">
-                    <span>上傳 Coupon 圖片（JPG / PNG）</span>
+                    <span>上傳票券圖片（JPG / PNG）</span>
                     <input id="couponImage" type="file" accept="image/jpeg,image/png" />
-                    <small>建議圖片不要太大，原型版將儲存在瀏覽器本機。</small>
                   </label>
                   <div class="image-preview-wrap">
                     <div id="imagePreviewEmpty" class="preview-empty">尚未選擇圖片</div>
@@ -137,25 +136,6 @@
             </div>
           </section>
 
-          <aside class="stack">
-            <div class="card">
-              <h2>圖片上傳邏輯</h2>
-              <ol class="plain-list small muted numbered">
-                <li>使用者在表單選擇 JPG 或 PNG。</li>
-                <li>前端讀取檔案並轉成 base64 Data URL。</li>
-                <li>Coupon 資料與圖片一起存在 LocalStorage。</li>
-                <li>畫面重新整理後仍可顯示，但只存在此瀏覽器。</li>
-              </ol>
-            </div>
-            <div class="card">
-              <h2>下一步建議</h2>
-              <ul class="plain-list small muted">
-                <li>若要正式版：將圖片改存雲端（例如 Azure Blob / Supabase Storage）。</li>
-                <li>將 Coupon 建立為獨立資料表，行程只存關聯 ID。</li>
-                <li>之後可加「已使用」、「剩餘次數」、「到期提醒」。</li>
-              </ul>
-            </div>
-          </aside>
         </div>
       </section>
 
